@@ -1,11 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>炫酷的H5页面</title>
+    <style>
+        body {
+            background-color: #FFF;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 50px 0;
+        }
+        #date {
+            text-align: center;
+            font-size: 30px;
+        }
+        .container {
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .cube {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            animation: spin 5s infinite linear;
+        }
+        .cube div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+        .cube .front  { transform: translateZ(50px); background: linear-gradient(to right, red, orange); }
+        .cube .back   { transform: translateZ(-50px); background: linear-gradient(to right, orange, yellow); }
+        .cube .left   { transform: rotateY(-90deg) translateZ(50px); background: linear-gradient(to right, yellow, green); }
+        .cube .right  { transform: rotateY(90deg) translateZ(50px); background: linear-gradient(to right, green, blue); }
+        .cube .top    { transform: rotateX(90deg) translateZ(50px); background: linear-gradient(to right, blue, indigo); }
+        .cube .bottom { transform: rotateX(-90deg) translateZ(50px); background: linear-gradient(to right, indigo, violet); }
+        @keyframes spin {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+    </style>
+    <script src="https://unpkg.com/chinese-lunar@1.0.2/index.js"></script>
 </head>
 <body>
-    <h1>GitHub test page 1</h1>
+    <h1>欢迎来到我的世界</h1>
+    <p id="date"></p>
+    <div class="container">
+        <div class="cube">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.cube').addEventListener('click', function() {
+            alert('你点击了立方体！');
+        });
+        function updateDateAndTime() {
+            // 获取当前的公历日期和时间
+            var gregorianDate = new Date();
+            // 在页面上显示公历日期、时间和农历日期
+            document.getElementById('date').textContent = gregorianDate.toLocaleDateString() + ' ' + gregorianDate.toLocaleTimeString();
+        }
+        // 立即更新日期和时间
+        updateDateAndTime();
+        // 每秒更新日期和时间
+        setInterval(updateDateAndTime, 1000);
+    </script>
 </body>
 </html>
